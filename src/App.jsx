@@ -184,7 +184,7 @@ export default function App() {
         <section className="hero fade-up">
           <h1 className="hero-title">SEYN</h1>
           <p className="hero-subtitle">
-            Tools for the version of yourself you're destined to become.
+            Tools for who you're destined to become.
           </p>
           <p className="hero-tags">Confidence · + · Connection</p>
         </section>
@@ -210,7 +210,7 @@ export default function App() {
         <footer className="footer fade-up" style={{ animationDelay: '0.8s' }}>
           <div className="footer-logo">SEYN</div>
           <p className="footer-tagline">
-            Designed for growth.
+            Designed for growth. 
           </p>
         </footer>
       </div>
