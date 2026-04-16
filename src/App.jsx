@@ -26,7 +26,7 @@ const products = [
     name: 'In Seync',
     tagline: 'Find your tribe',
     description:
-      'For finding and connecting with your people. We all deserve to belong"',
+      'For finding and connecting with your people. Find events, groups and communities that share your vibe',
     status: 'soon',
     icon: '🤝',
     accent: [61, 191, 160],
