@@ -45,7 +45,8 @@ const products = [
     tagline: 'Screen health optimiser',
     description:
       'Computer vision eye strain and mood detection. Your desktop ally for healthier screen time, and more productive days.',
-    status: 'soon',
+    status: 'live',
+    url: 'https://screyn.seyn.co.uk',
     icon: '👁',
     accent: [74, 159, 232],
   },
