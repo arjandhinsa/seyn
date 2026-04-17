@@ -191,18 +191,13 @@ export default function App() {
         </section>
 
         <section className="products">
-          <div className="products-live">
-            {liveProducts.map((p, i) => (
-              <ProductCard key={p.name} product={p} index={i} isLive />
-            ))}
-          </div>
-          <div className="products-soon">
-            {soonProducts.map((p, i) => (
+          <div className="products-grid">
+            {products.map((p, i) => (
               <ProductCard
                 key={p.name}
                 product={p}
-                index={i + liveProducts.length}
-                isLive={false}
+                index={i}
+                isLive={p.status === 'live'}
               />
             ))}
           </div>

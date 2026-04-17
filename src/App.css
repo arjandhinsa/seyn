@@ -147,14 +147,7 @@
 
 .products { padding-bottom: 60px; }
 
-.products-live {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
-  gap: 20px;
-  margin-bottom: 20px;
-}
-
-.products-soon {
+.products-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
   gap: 20px;
