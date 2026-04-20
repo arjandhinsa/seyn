@@ -24,6 +24,5 @@ npm run dev
 
 - **Seynse** — Social confidence coach ([seynse.seyn.co.uk](https://seynse.seyn.co.uk))
 - **Seynario** — Dress for the scenario ([seynario.seyn.co.uk](https://seynario.seyn.co.uk))
-- **Seync** — Find your tribe (coming soon)
 - **Be Seyn** — Identity marketing platform (coming soon)
-- **Screyn** — Screen health guardian (coming soon)
+- **Screyn** — Screen health optimiser (coming soon)
