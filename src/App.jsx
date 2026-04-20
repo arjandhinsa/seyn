@@ -23,15 +23,6 @@ const products = [
     accent: [232, 168, 56],
   },
   {
-    name: 'In Seync',
-    tagline: 'Find your tribe',
-    description:
-      'For finding and connecting with your people. Find events, groups and communities that share your vibe',
-    status: 'soon',
-    icon: '🤝',
-    accent: [61, 191, 160],
-  },
-  {
     name: 'Be Seyn',
     tagline: 'Identity marketing platform',
     description:
