@@ -15,11 +15,12 @@
  * ===================================================== */
 
 :root {
-  --paper: #F5EFE0;
-  --ruled: rgba(184, 199, 224, 0.4);
-  --margin-red: rgba(232, 168, 168, 0.5);
-  --ink: #1A1A1A;
-  --ink-blue: #1F3A8C;
+  --paper: #D9C79A;              /* aged parchment / tobacco */
+  --paper-warm: #C7B487;         /* deeper shadow of the paper */
+  --ruled: rgba(120, 96, 64, 0.35);   /* warm sepia rule lines */
+  --margin-red: rgba(120, 48, 48, 0.55); /* oxblood margin line */
+  --ink: #1A1512;                /* warm black / dark espresso */
+  --ink-blue: #1E2B5C;           /* deep navy biro */
 }
 
 /* ===== Layout ===== */
@@ -28,6 +29,13 @@
   min-height: 100vh;
   position: relative;
   background: var(--paper);
+  /* subtle warm vignette to deepen the mood */
+  background-image: radial-gradient(
+    ellipse at center,
+    var(--paper) 0%,
+    var(--paper) 55%,
+    var(--paper-warm) 120%
+  );
 }
 
 .content {
@@ -91,7 +99,7 @@
   width: 100%;
   height: 100%;
   pointer-events: none;
-  opacity: 0.06;
+  opacity: 0.11;
   z-index: 1;
   mix-blend-mode: multiply;
 }
@@ -213,7 +221,7 @@
   height: 30px;
   width: auto;
   display: block;
-  filter: drop-shadow(0 1px 0 rgba(0, 0, 0, 0.04));
+  filter: drop-shadow(0 1px 0 rgba(20, 14, 6, 0.15));
 }
 
 .nav-links {
@@ -283,7 +291,7 @@
   height: clamp(120px, 14vw, 180px);
   width: auto;
   transform: rotate(-1deg);
-  filter: drop-shadow(1px 2px 0 rgba(0, 0, 0, 0.06));
+  filter: drop-shadow(1px 2px 0 rgba(20, 14, 6, 0.18));
 }
 
 .hero-subtitle {
@@ -307,23 +315,6 @@
 }
 
 .hero-tag-dot { opacity: 0.4; margin: 0 2px; }
-
-.hero-note {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  color: var(--ink-blue);
-  font-family: 'DM Sans', sans-serif;
-  font-style: italic;
-  font-size: 15px;
-  transform: rotate(-4deg);
-  margin-top: 10px;
-}
-
-.hero-note-text {
-  border-bottom: 1.5px solid var(--ink-blue);
-  padding-bottom: 1px;
-}
 
 .hero-divider {
   display: flex;
@@ -384,15 +375,14 @@
   padding: 30px 26px 26px;
   min-height: 260px;
   border-radius: 2px;
-  /* soft post-it shadow */
+  /* deeper, moodier post-it shadow for dark academia feel */
   box-shadow:
-    0 1px 1px rgba(0, 0, 0, 0.05),
-    2px 6px 14px rgba(30, 25, 10, 0.15),
-    1px 14px 22px rgba(30, 25, 10, 0.08);
+    0 1px 2px rgba(0, 0, 0, 0.12),
+    3px 8px 18px rgba(20, 14, 6, 0.25),
+    2px 18px 28px rgba(20, 14, 6, 0.14);
   display: flex;
   flex-direction: column;
   height: 100%;
-  /* tiny paper texture inside the note */
   background-image: none;
 }
 
@@ -403,9 +393,9 @@
   pointer-events: none;
   background: linear-gradient(
     180deg,
-    rgba(255, 255, 255, 0.25) 0%,
-    rgba(255, 255, 255, 0) 30%,
-    rgba(0, 0, 0, 0.04) 100%
+    rgba(255, 248, 230, 0.18) 0%,
+    rgba(255, 255, 255, 0) 35%,
+    rgba(20, 14, 6, 0.10) 100%
   );
   mix-blend-mode: multiply;
   border-radius: 2px;
@@ -439,8 +429,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.45);
-  border: 1.4px solid rgba(26, 26, 26, 0.55);
+  background: rgba(245, 236, 210, 0.55);
+  border: 1.4px solid rgba(20, 14, 6, 0.7);
   border-radius: 10px;
   transform: rotate(-2deg);
 }
@@ -454,7 +444,7 @@
   padding: 4px 10px;
   border: 1.2px solid var(--ink);
   border-radius: 2px;
-  background: rgba(255, 255, 255, 0.45);
+  background: rgba(245, 236, 210, 0.55);
   color: var(--ink);
   transform: rotate(2deg);
   display: inline-flex;
@@ -466,9 +456,9 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #1A7A4A;
+  background: #4A6B3A;   /* deep moss green */
   display: inline-block;
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15);
 }
 
 .badge--soon {

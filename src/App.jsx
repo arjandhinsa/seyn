@@ -14,7 +14,7 @@ const products = [
     status: 'live',
     url: 'https://seynse.seyn.co.uk',
     icon: 'brain',
-    accent: '#C9B6FF', // purple highlighter
+    accent: '#8E76B3', // deep plum highlighter
     rotation: -1.4,
   },
   {
@@ -25,7 +25,7 @@ const products = [
     status: 'live',
     url: 'https://seynario.seyn.co.uk',
     icon: 'shirt',
-    accent: '#FFE68A', // yellow highlighter
+    accent: '#BF9644', // antique mustard / ochre highlighter
     rotation: 1.2,
   },
   {
@@ -35,7 +35,7 @@ const products = [
       "Discover and communicate what makes you, you. For individuals and businesses alike.",
     status: 'soon',
     icon: 'spark',
-    accent: '#FFB5C5', // pink highlighter
+    accent: '#A25D6F', // oxblood / dusty rose highlighter
     rotation: -0.9,
   },
   {
@@ -46,7 +46,7 @@ const products = [
     status: 'live',
     url: 'https://screyn.seyn.co.uk',
     icon: 'eye',
-    accent: '#A8D0FF', // blue highlighter
+    accent: '#5E7FA6', // slate / midnight-blue highlighter
     rotation: 1.6,
   },
 ]
@@ -181,7 +181,7 @@ function MarginDoodle({ kind = 'arrow', className, color = '#1A1A1A', size = 28 
   return null
 }
 
-function TapedCorner({ color = '#F0E6C8' }) {
+function TapedCorner({ color = '#E8DBB2' }) {
   // Small piece of sketched tape on the top-left corner of a post-it
   return (
     <svg
@@ -465,9 +465,9 @@ export default function App() {
         {/* Hero */}
         <section className="hero fade-up">
           {/* Doodles floating around the hero */}
-          <MarginDoodle kind="star" className="doodle doodle-hero-star" size={26} color="#1F3A8C" />
+          <MarginDoodle kind="star" className="doodle doodle-hero-star" size={26} color="#1E2B5C" />
           <MarginDoodle kind="arrow" className="doodle doodle-hero-arrow" size={44} color="#1A1A1A" />
-          <MarginDoodle kind="asterisk" className="doodle doodle-hero-asterisk" size={20} color="#1F3A8C" />
+          <MarginDoodle kind="asterisk" className="doodle doodle-hero-asterisk" size={20} color="#1E2B5C" />
 
           <div className="hero-logo-wrap">
             <img src="/seyn-logo.svg" alt="SEYN" className="hero-logo" />
@@ -480,11 +480,6 @@ export default function App() {
           <p className="hero-tags">
             Confidence <span className="hero-tag-dot">·</span> + <span className="hero-tag-dot">·</span> Connection
           </p>
-
-          <div className="hero-note">
-            <span className="hero-note-text">love this</span>
-            <MarginDoodle kind="smiley" size={22} color="#1F3A8C" />
-          </div>
 
           <div className="hero-divider">
             <WavyDivider color="#1A1A1A" width={240} />
@@ -500,8 +495,8 @@ export default function App() {
 
           {/* Some margin scribbles near the products */}
           <MarginDoodle kind="squiggle" className="doodle doodle-products-squiggle" size={40} color="#1A1A1A" />
-          <MarginDoodle kind="tick" className="doodle doodle-products-tick" size={26} color="#1F3A8C" />
-          <MarginDoodle kind="circle" className="doodle doodle-products-circle" size={32} color="#1F3A8C" />
+          <MarginDoodle kind="tick" className="doodle doodle-products-tick" size={26} color="#1E2B5C" />
+          <MarginDoodle kind="circle" className="doodle doodle-products-circle" size={32} color="#1E2B5C" />
 
           <div className="products-grid">
             {products.map((p, i) => (
@@ -526,7 +521,7 @@ export default function App() {
           </div>
           <div className="footer-logo">SEYN</div>
           <p className="footer-tagline">Designed for growth.</p>
-          <MarginDoodle kind="star" className="doodle doodle-footer-star" size={18} color="#1F3A8C" />
+          <MarginDoodle kind="star" className="doodle doodle-footer-star" size={18} color="#1E2B5C" />
         </footer>
       </div>
     </div>

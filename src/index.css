@@ -14,8 +14,8 @@ html {
 
 body {
   font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
-  background: #F5EFE0;
-  color: #1A1A1A;
+  background: #D9C79A;
+  color: #1A1512;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -27,6 +27,6 @@ a {
 }
 
 ::selection {
-  background: rgba(201, 182, 255, 0.55);
-  color: #1A1A1A;
+  background: rgba(142, 118, 179, 0.6);  /* deep plum highlighter */
+  color: #1A1512;
 }
