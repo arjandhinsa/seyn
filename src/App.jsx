@@ -33,7 +33,8 @@ const products = [
     tagline: 'Identity marketing platform',
     description:
       "Discover and communicate what makes you, you. For individuals and businesses alike.",
-    status: 'soon',
+    status: 'live',
+    url: 'https://be.seyn.co.uk',
     icon: 'spark',
     accent: '#A25D6F', // oxblood / dusty rose highlighter
     rotation: -0.9,
