@@ -29,17 +29,6 @@ const products = [
     rotation: 1.2,
   },
   {
-    name: 'Be Seyn',
-    tagline: 'Identity marketing platform',
-    description:
-      "Discover and communicate what makes you, you. For individuals and businesses alike.",
-    status: 'live',
-    url: 'https://be.seyn.co.uk',
-    icon: 'spark',
-    accent: '#A25D6F', // oxblood / dusty rose highlighter
-    rotation: -0.9,
-  },
-  {
     name: 'Screyn',
     tagline: 'Screen health optimiser',
     description:
