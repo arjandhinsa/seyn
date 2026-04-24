@@ -10,7 +10,7 @@ const products = [
     name: 'Seynse',
     tagline: 'Social confidence coach',
     description:
-      'CBT-based graduated exposure therapy with AI coaching. Build confidence through 27 challenges across social, professional, and romantic categories.',
+      'CBT-based graduated exposure therapy with AI coaching. Build confidence through challenges that get progressively harder across social and romantic categories.',
     status: 'live',
     url: 'https://seynse.seyn.co.uk',
     icon: 'brain',
