@@ -467,10 +467,6 @@ export default function App() {
             Tools for who you're destined to become.
           </p>
 
-          <p className="hero-tags">
-            Confidence <span className="hero-tag-dot">·</span> + <span className="hero-tag-dot">·</span> Connection
-          </p>
-
           <div className="hero-divider">
             <WavyDivider color="#1A1A1A" width={240} />
           </div>
