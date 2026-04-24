@@ -7,12 +7,12 @@ import './App.css'
 
 const products = [
   {
-    name: 'Seynse',
+    name: 'Seynsei',
     tagline: 'Social confidence coach',
     description:
       'CBT-based graduated exposure therapy with AI coaching. Build confidence through challenges that get progressively harder across social and romantic categories.',
-    status: 'live',
-    url: 'https://seynse.seyn.co.uk',
+    status: 'in-development',
+    url: 'https://seynsei.seyn.co.uk',
     icon: 'brain',
     accent: '#8E76B3', // deep plum highlighter
     rotation: -1.4,
