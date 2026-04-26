@@ -11,7 +11,7 @@ const products = [
     tagline: 'Social confidence coach',
     description:
       'CBT-based graduated exposure therapy with AI coaching. Build confidence through challenges that get progressively harder across social and romantic categories.',
-    status: 'in-development',
+    status: 'live',
     url: 'https://seynsei.seyn.co.uk',
     icon: 'brain',
     accent: '#8E76B3', // deep plum highlighter
