@@ -28,17 +28,6 @@ const products = [
     accent: '#BF9644', // antique mustard / ochre highlighter
     rotation: 1.2,
   },
-  {
-    name: 'Screyn',
-    tagline: 'Screen health optimiser',
-    description:
-      'Computer vision eye strain and mood detection. Your desktop ally for healthier screen time, and more productive days.',
-    status: 'live',
-    url: 'https://screyn.seyn.co.uk',
-    icon: 'eye',
-    accent: '#5E7FA6', // slate / midnight-blue highlighter
-    rotation: 1.6,
-  },
 ]
 
 /* ---------------------------------------------------------------
