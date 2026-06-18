@@ -17,17 +17,6 @@ const products = [
     accent: '#8E76B3', // deep plum highlighter
     rotation: -1.4,
   },
-  {
-    name: 'Seynario',
-    tagline: 'Dress for the scenario',
-    description:
-      'AI wardrobe scanner meets outfit engine. Photograph your clothes, pick your scenario, and get styled. Mix what you own with what you need.',
-    status: 'live',
-    url: 'https://seynario.seyn.co.uk',
-    icon: 'shirt',
-    accent: '#BF9644', // antique mustard / ochre highlighter
-    rotation: 1.2,
-  },
 ]
 
 /* ---------------------------------------------------------------
