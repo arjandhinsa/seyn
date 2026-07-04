@@ -405,7 +405,7 @@ export default function App() {
               <summary>
                 <span className="date">NO. {e.no}</span>
                 <h3>{e.title}</h3>
-                <span className="read">2 min →</span>
+                <span className="read">1 min →</span>
               </summary>
               <div className="body">{e.body}</div>
             </details>
