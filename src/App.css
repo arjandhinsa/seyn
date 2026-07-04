@@ -28,9 +28,8 @@
 /* ---- nav ---- */
 nav { position: sticky; top: 0; z-index: 50; background: rgba(244, 242, 236, 0.88); backdrop-filter: blur(8px); border-bottom: 1px solid var(--rule); }
 .nav-in { display: flex; align-items: center; justify-content: space-between; height: 64px; }
-.wordmark { display: flex; align-items: center; gap: 10px; }
-.wordmark-eye { height: 26px; display: block; }
-.wordmark-name { font-size: 19px; letter-spacing: 0.06em; color: var(--ink); }
+.wordmark { display: flex; align-items: center; }
+.wordmark-eye { height: 30px; display: block; }
 .nav-links { display: flex; gap: 26px; align-items: center; font-size: 13px; letter-spacing: 0.04em; }
 .nav-links a { color: var(--ink-2); transition: color 0.2s; }
 .nav-links a:hover, .nav-links a:focus-visible { color: var(--ink); }

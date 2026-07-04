@@ -342,8 +342,7 @@ export default function App() {
       <nav>
         <div className="wrap nav-in">
           <a href="#top" className="wordmark" aria-label="SEYN home">
-            <img className="wordmark-eye" src="/favicon.svg" alt="" aria-hidden="true" />
-            <span className="wordmark-name serif">SEYN</span>
+            <img className="wordmark-eye" src="/favicon.svg" alt="SEYN" />
           </a>
           <div className="nav-links">
             <a href="#journal">Journal</a>
