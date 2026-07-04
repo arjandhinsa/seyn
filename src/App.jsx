@@ -349,6 +349,7 @@ export default function App() {
             <a href="#services">Services</a>
             <a href="#work">Work</a>
             <a
+              className="nav-ig"
               href="https://instagram.com/getseyn"
               target="_blank"
               rel="noopener noreferrer"
