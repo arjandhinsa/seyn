@@ -22,5 +22,5 @@ npm run dev
 
 ## Products
 
-- **Seynsei** — Social confidence coach ([seynse.seyn.co.uk](https://seynse.seyn.co.uk))
+- **Seynsei** — Social confidence coach ([seynse.seyn.co.uk](https://seynsei.seyn.co.uk))
 

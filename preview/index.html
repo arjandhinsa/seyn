@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEYN — get seyn, properly.</title>
+<meta name="description" content="SEYN is an attention studio. Marketing, custom builds, consulting and confidence tools for brands, products and people who deserve to be seen.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Archivo:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F4F2EC; --paper-2:#ECE9E0; --ink:#1A1512; --ink-2:#5F6B66;
+  --teal:#407373; --teal-deep:#2E5B5B; --teal-soft:#8CC3C3;
+  --gold:#C9A96A; --sage:#9AA8A3; --night:#0E1820; --night-2:#16222D;
+  --rule:rgba(26,21,18,.16);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:'Archivo',sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.serif{font-family:'Fraunces',serif;font-weight:400}
+a{color:inherit;text-decoration:none}
+::selection{background:rgba(64,115,115,.28)}
+.wrap{max-width:1120px;margin:0 auto;padding:0 28px}
+.eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-2)}
+.rule{border:0;border-top:1px solid var(--rule)}
+
+/* ---- nav ---- */
+nav{position:sticky;top:0;z-index:50;background:rgba(244,242,236,.88);backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;height:64px}
+.wordmark{font-family:'Fraunces',serif;font-size:22px;letter-spacing:.02em}
+.wordmark sup{font-size:9px;vertical-align:super;color:var(--teal-deep)}
+.nav-links{display:flex;gap:26px;align-items:center;font-size:13px;letter-spacing:.04em}
+.nav-links a{color:var(--ink-2);transition:color .2s}
+.nav-links a:hover,.nav-links a:focus-visible{color:var(--ink)}
+.btn{display:inline-block;padding:11px 22px;border:1.5px solid var(--ink);border-radius:999px;font-size:13px;letter-spacing:.04em;font-weight:500;transition:all .22s;background:transparent;cursor:pointer;color:var(--ink)}
+.btn:hover,.btn:focus-visible{background:var(--ink);color:var(--paper)}
+.btn--solid{background:var(--ink);color:var(--paper)}
+.btn--solid:hover{background:var(--teal-deep);border-color:var(--teal-deep)}
+
+/* ---- hero ---- */
+.hero{padding:96px 0 84px;position:relative}
+.hero h1{font-family:'Fraunces',serif;font-weight:300;font-size:clamp(46px,8.5vw,104px);line-height:.98;letter-spacing:-.015em;max-width:11ch}
+.hero h1 .u{font-style:italic;font-weight:400;border-bottom:4px solid var(--teal);padding-bottom:.02em}
+.hero .sub{margin-top:30px;font-size:17px;color:var(--ink-2);max-width:46ch}
+.hero .ctas{margin-top:38px;display:flex;gap:14px;flex-wrap:wrap}
+.hero-meta{display:flex;justify-content:space-between;margin-bottom:64px}
+.eye{position:absolute;right:28px;top:190px;width:120px;height:66px}
+@media(max-width:900px){.eye{display:none}}
+.eye svg{width:100%;height:100%;overflow:visible}
+.eye .lid{transform-origin:center;animation:blink 6.5s infinite}
+@keyframes blink{0%,94%,100%{transform:scaleY(1)}96.5%{transform:scaleY(.06)}}
+@media(prefers-reduced-motion:reduce){.eye .lid{animation:none}}
+
+/* ---- ledger ---- */
+.section{padding:84px 0}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:36px}
+.sec-head h2{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(28px,4vw,42px);letter-spacing:-.01em}
+.ledger{border-top:1px solid var(--rule)}
+.row{display:grid;grid-template-columns:64px 1fr 1.2fr auto;gap:20px;align-items:baseline;padding:26px 4px;border-bottom:1px solid var(--rule);transition:background .2s}
+.row:hover{background:var(--paper-2)}
+.row .idx{font-size:12px;letter-spacing:.1em;color:var(--sage)}
+.row h3{font-family:'Fraunces',serif;font-weight:400;font-size:22px}
+.row p{font-size:14.5px;color:var(--ink-2);max-width:44ch}
+.row .tag{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal-deep)}
+@media(max-width:760px){.row{grid-template-columns:44px 1fr;grid-template-rows:auto auto}.row p{grid-column:2}.row .tag{display:none}}
+
+/* ---- work band ---- */
+.band{background:var(--night);color:#EDE8DD;position:relative;overflow:hidden}
+#beam{position:absolute;inset:0;pointer-events:none;background:radial-gradient(340px circle at var(--mx,70%) var(--my,30%),rgba(140,195,195,.13),transparent 70%);transition:background .05s}
+.band .eyebrow{color:var(--teal-soft)}
+.band .sec-head h2{color:#EDE8DD}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px}
+.card{border:1px solid rgba(237,232,221,.14);border-radius:16px;padding:30px 28px;position:relative;transition:border-color .25s, transform .25s;background:rgba(22,34,45,.55)}
+.card:hover{border-color:rgba(140,195,195,.45);transform:translateY(-3px)}
+.card .status{position:absolute;top:24px;right:24px;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-soft);display:flex;gap:6px;align-items:center}
+.card .dot{width:6px;height:6px;border-radius:50%;background:#7BC47F;box-shadow:0 0 8px #7BC47F}
+.card h3{font-family:'Fraunces',serif;font-weight:400;font-size:26px;margin:18px 0 4px}
+.card .tagline{font-family:'Fraunces',serif;font-style:italic;font-size:14px;color:var(--teal-soft)}
+.card p{font-size:14px;color:#B9B2A4;margin-top:14px;line-height:1.65}
+.card .go{display:inline-block;margin-top:22px;font-size:13px;letter-spacing:.06em;color:#EDE8DD;border-bottom:1px solid var(--teal);padding-bottom:3px}
+.card .go:hover{color:var(--teal-soft)}
+.card--reserved{border-style:dashed;background:transparent;display:flex;flex-direction:column;justify-content:center;align-items:flex-start}
+.card--reserved h3{font-style:italic;font-weight:300}
+.card--reserved p{margin-top:8px}
+.mark{width:34px;height:34px}
+
+/* ---- about ---- */
+.about p{font-family:'Fraunces',serif;font-weight:300;font-size:clamp(21px,2.6vw,29px);line-height:1.5;max-width:30ch;letter-spacing:-.005em}
+.about p em{font-style:italic;color:var(--teal-deep)}
+.about .cols{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:44px}
+.about .cols div{font-size:14.5px;color:var(--ink-2);font-family:'Archivo',sans-serif;max-width:40ch}
+@media(max-width:760px){.about .cols{grid-template-columns:1fr}}
+
+/* ---- enquiry ---- */
+.enquiry{background:var(--paper-2);border-top:1px solid var(--rule)}
+form{max-width:620px;margin-top:8px}
+.field{margin-bottom:22px}
+label{display:block;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);margin-bottom:8px}
+input,select,textarea{width:100%;padding:13px 14px;border:1px solid var(--rule);border-radius:10px;background:var(--paper);font-family:'Archivo',sans-serif;font-size:15px;color:var(--ink);outline:none;transition:border-color .2s}
+input:focus,select:focus,textarea:focus{border-color:var(--teal)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:600px){.two{grid-template-columns:1fr}}
+.side-note{font-size:13px;color:var(--ink-2);margin-top:18px}
+.side-note a{color:var(--teal-deep);border-bottom:1px solid var(--teal-soft)}
+
+/* ---- footer ---- */
+footer{padding:56px 0 40px}
+.foot{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:flex-end}
+.foot .big{font-family:'Fraunces',serif;font-size:clamp(56px,10vw,120px);font-weight:300;line-height:.9;letter-spacing:-.01em;color:var(--ink)}
+.foot .big em{font-style:italic;color:var(--teal-deep)}
+.foot-links{font-size:13.5px;color:var(--ink-2);text-align:right;line-height:2}
+.foot-links a{border-bottom:1px solid transparent;transition:all .2s}
+.foot-links a:hover{color:var(--ink);border-color:var(--teal)}
+.legal{margin-top:34px;padding-top:18px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:12px;color:var(--sage)}
+
+/* reveals */
+.rv{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+a:focus-visible,button:focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:4px}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-in">
+    <a href="#top" class="wordmark" aria-label="SEYN home"><img src="../public/seyn-logo.svg" alt="SEYN" style="height:34px;display:block"></a>
+    <div class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="https://instagram.com/getseyn" target="_blank" rel="noopener" aria-label="SEYN on Instagram">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <a class="btn" href="#enquire">Enquire</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero wrap" id="top">
+  <div class="hero-meta eyebrow">
+    <span>SEYN · attention studio</span>
+    <span>United Kingdom</span>
+  </div>
+  <h1>Get <span class="u">seyn</span>, properly.</h1>
+  <p class="sub">SEYN is a studio for brands, products and people who deserve attention. We build the campaigns, tools and products that get you noticed, and the ones that make being noticed easier.</p>
+  <div class="ctas">
+    <a class="btn btn--solid" href="#enquire">Start an enquiry</a>
+    <a class="btn" href="#work">See the work</a>
+  </div>
+  <div class="eye" aria-hidden="true">
+    <svg viewBox="0 0 120 66">
+      <g class="lid">
+        <path d="M4 33 C 26 8, 94 8, 116 33 C 94 58, 26 58, 4 33 Z" fill="none" stroke="#1A1512" stroke-width="2"/>
+        <circle id="pupil" cx="60" cy="33" r="11" fill="#407373"/>
+        <circle id="glint" cx="64" cy="29" r="3" fill="#F4F2EC"/>
+      </g>
+    </svg>
+  </div>
+</header>
+
+<section class="section wrap" id="services">
+  <div class="sec-head rv">
+    <h2>What we <em class="serif" style="font-style:italic">do</em></h2>
+    <span class="eyebrow">pick a lane or blur them</span>
+  </div>
+  <div class="ledger rv">
+    <div class="row">
+      <span class="idx">S.01</span>
+      <h3>Marketing &amp; attention</h3>
+      <p>Campaigns, content and positioning that earn notice instead of renting it. For brands tired of shouting into the feed.</p>
+      <span class="tag">brands</span>
+    </div>
+    <div class="row">
+      <span class="idx">S.02</span>
+      <h3>Custom builds</h3>
+      <p>Websites, apps and tools designed and built end to end. If it needs to exist and turn heads, we make it.</p>
+      <span class="tag">product</span>
+    </div>
+    <div class="row">
+      <span class="idx">S.03</span>
+      <h3>B2B growth &amp; consulting</h3>
+      <p>Straight answers on how your business gets in front of the people it needs. Strategy you can act on the same week.</p>
+      <span class="tag">business</span>
+    </div>
+    <div class="row">
+      <span class="idx">S.04</span>
+      <h3>Confidence &amp; health tools</h3>
+      <p>Being seen starts with being able to stand it. We build products for the human side of visibility, starting with Seynsei.</p>
+      <span class="tag">people</span>
+    </div>
+  </div>
+</section>
+
+<section class="band section" id="work">
+  <div id="beam"></div>
+  <div class="wrap">
+    <div class="sec-head rv">
+      <h2>Seen lately</h2>
+      <span class="eyebrow">the proof</span>
+    </div>
+    <div class="cards rv">
+      <a class="card" href="https://seynsei.seyn.co.uk" target="_blank" rel="noopener">
+        <span class="status"><span class="dot"></span>Live</span>
+        <svg class="mark" viewBox="0 0 72 72" fill="none" aria-hidden="true"><path d="M50 15 A28 28 0 1 0 60 45" stroke="#6FA3A3" stroke-width="7" stroke-linecap="round"/><circle cx="36" cy="36" r="7.5" fill="#6FA3A3"/></svg>
+        <h3>Seynsei</h3>
+        <div class="tagline">Social confidence coach</div>
+        <p>Small real-world confidence challenges, graded from a moment of eye contact to the conversations you avoid. Rate the anxiety before and after, and talk it through with a calm CBT-informed coach.</p>
+        <span class="go">Try it free →</span>
+      </a>
+      <div class="card card--reserved">
+        <h3>This space is reserved.</h3>
+        <p>The next thing we make seen could be yours. Bring us a brand, a product or a problem.</p>
+        <a class="go" href="#enquire">Enquire below →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section wrap about" id="about">
+  <span class="eyebrow rv">Why SEYN exists</span>
+  <p class="rv" style="margin-top:22px">Good things go unnoticed every day. Good businesses, good products, good people. We think that's a design problem, and <em>design problems can be solved.</em></p>
+  <div class="cols rv">
+    <div>SEYN Ltd is a UK studio working across marketing, product and consulting. One team, one obsession: engineering the moment where the right people finally notice.</div>
+    <div>We take on a small number of clients at a time and build our own products between engagements, so every promise we make to you has been tested on ourselves first.</div>
+  </div>
+</section>
+
+<section class="section enquiry" id="enquire">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <h2>Be <em class="serif" style="font-style:italic">seyn</em> next</h2>
+      <span class="eyebrow">replies within 48 hours</span>
+    </div>
+    <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="rv">
+      <div class="two">
+        <div class="field">
+          <label for="name">Name</label>
+          <input id="name" name="name" type="text" required autocomplete="name">
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" required autocomplete="email">
+        </div>
+      </div>
+      <div class="field">
+        <label for="need">What do you need?</label>
+        <select id="need" name="need">
+          <option>Marketing and attention</option>
+          <option>A custom build (site, app, tool)</option>
+          <option>Consulting</option>
+          <option>Something else entirely</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="message">Tell us about it</label>
+        <textarea id="message" name="message" rows="5" placeholder="What are you building, and who needs to see it?" required></textarea>
+      </div>
+      <button class="btn btn--solid" type="submit">Send it</button>
+      <p class="side-note">Prefer email? <a href="mailto:hello@seyn.co.uk">hello@seyn.co.uk</a></p>
+    </form>
+  </div>
+</section>
+
+<footer class="wrap">
+  <div class="foot">
+    <div class="rv"><img src="../public/seyn-logo.svg" alt="" aria-hidden="true" style="height:56px;margin-bottom:18px;opacity:.9"><div class="big">Get <em>seen.</em></div></div>
+    <div class="foot-links rv">
+      <a href="mailto:hello@seyn.co.uk">hello@seyn.co.uk</a><br>
+      <a href="https://instagram.com/getseyn" target="_blank" rel="noopener">@getseyn</a> · SEYN on Instagram<br>
+      <a href="https://instagram.com/seynseiapp" target="_blank" rel="noopener">@seynseiapp</a> · Seynsei on Instagram
+    </div>
+  </div>
+  <div class="legal">
+    <span>© 2026 SEYN Ltd. Registered in England.</span>
+    <span><a href="https://seynsei.seyn.co.uk/privacy.html">Privacy</a></span>
+  </div>
+</footer>
+
+<script>
+// Pupil tracks the cursor, gently.
+const pupil = document.getElementById('pupil');
+const glint = document.getElementById('glint');
+const eye = document.querySelector('.eye');
+let raf = null;
+window.addEventListener('mousemove', (e) => {
+  if (!eye || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (raf) return;
+  raf = requestAnimationFrame(() => {
+    const r = eye.getBoundingClientRect();
+    const dx = e.clientX - (r.left + r.width / 2);
+    const dy = e.clientY - (r.top + r.height / 2);
+    const ang = Math.atan2(dy, dx);
+    const dist = Math.min(14, Math.hypot(dx, dy) / 40);
+    const px = 60 + Math.cos(ang) * dist;
+    const py = 33 + Math.sin(ang) * dist * 0.55;
+    pupil.setAttribute('cx', px); pupil.setAttribute('cy', py);
+    glint.setAttribute('cx', px + 4); glint.setAttribute('cy', py - 4);
+    raf = null;
+  });
+});
+// Spotlight beam follows cursor across the dark work band.
+const band = document.querySelector('.band');
+band.addEventListener('mousemove', (e) => {
+  const r = band.getBoundingClientRect();
+  band.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+  band.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+});
+// Scroll reveals.
+const io = new IntersectionObserver((es) => {
+  es.forEach(x => { if (x.isIntersecting) { x.target.classList.add('in'); io.unobserve(x.target); } });
+}, { threshold: 0.12 });
+document.querySelectorAll('.rv').forEach(el => io.observe(el));
+</script>
+</body>
+</html>

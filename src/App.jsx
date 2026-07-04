@@ -1,386 +1,332 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import './App.css'
 
 /* ---------------------------------------------------------------
- * Product data
+ * Journal entries — add a new object at the TOP of this list each
+ * month. Keep bodies to ~3 short paragraphs. That's the whole job.
  * -------------------------------------------------------------*/
 
-const products = [
+const JOURNAL = [
   {
-    name: 'Seynsei',
-    tagline: 'Social confidence coach',
-    description:
-      'CBT-based graduated exposure therapy with AI coaching. Build confidence through challenges that get progressively harder across social and romantic categories.',
-    status: 'live',
-    url: 'https://seynsei.seyn.co.uk',
-    icon: 'brain',
-    accent: '#8E76B3', // deep plum highlighter
-    rotation: -1.4,
+    no: '001',
+    title: 'Three free ways to get seen this month',
+    body: (
+      <>
+        <p>
+          One: claim and finish your Google Business Profile. Photos, hours,
+          a real description, and answers to the questions people already
+          ask. It is the highest-return hour in local marketing and most
+          businesses leave it half done.
+        </p>
+        <p>
+          Two: pick one channel and post twice a week for a month. Not four
+          channels once. The algorithm rewards consistency and so do humans;
+          a thin presence everywhere reads as no presence at all.
+        </p>
+        <p>
+          Three: put a face on it. Founder-posted content outperforms
+          brand-posted content almost everywhere, because people notice
+          people. You are the cheapest differentiator you own.
+        </p>
+      </>
+    ),
+  },
+  {
+    no: '002',
+    title: "Your website isn't ugly, it's unclear",
+    body: (
+      <>
+        <p>
+          Most sites fail a five-second test: a stranger lands, and five
+          seconds later cannot say what you do, who it's for, or what to
+          click. Beauty doesn't fix that. Clarity does.
+        </p>
+        <p>
+          The repair is unglamorous. One headline that says what you do in
+          plain words. One action per page. Proof near the promise: a
+          number, a name, a screenshot. Cut everything that exists because
+          it felt professional to include.
+        </p>
+        <p>Run the test on your own site tonight. Ask someone who owes you nothing.</p>
+      </>
+    ),
+  },
+  {
+    no: '003',
+    title: 'Confidence is trained, not found',
+    body: (
+      <>
+        <p>
+          Being seen is a skill with a body attached. The reason exposure
+          works, in CBT and in life, is that anxiety falls when you stay in
+          the moment you wanted to escape, and your brain quietly files the
+          evidence.
+        </p>
+        <p>
+          The method is gradual: three seconds of eye contact before a
+          conversation, a conversation before an ask. Rate how you feel
+          before and after and the numbers do the convincing.
+        </p>
+        <p>
+          We turned this into a product. It's called{' '}
+          <a href="https://seynsei.seyn.co.uk" target="_blank" rel="noopener noreferrer">
+            Seynsei
+          </a>
+          , and the first tier is free.
+        </p>
+      </>
+    ),
   },
 ]
 
-/* ---------------------------------------------------------------
- * Decorative SVG components
- * -------------------------------------------------------------*/
+const SERVICES = [
+  {
+    idx: 'S.01',
+    name: 'Marketing & attention',
+    blurb:
+      'Campaigns, content and positioning that earn notice instead of renting it. For brands tired of shouting into the feed.',
+    tag: 'brands',
+  },
+  {
+    idx: 'S.02',
+    name: 'Social tools',
+    blurb:
+      'Being seen starts with being able to stand it. We build tools for the human side of visibility: confidence, connection, showing up. Seynsei is the first.',
+    tag: 'people',
+  },
+  {
+    idx: 'S.03',
+    name: 'B2B growth & consulting',
+    blurb:
+      'Straight answers on how your business gets in front of the people it needs. Strategy you can act on the same week.',
+    tag: 'business',
+  },
+]
 
-function PaperTexture() {
-  // Subtle paper grain overlay using SVG noise
-  return (
-    <svg className="paper-texture" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <filter id="paperNoise">
-        <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch" />
-        <feColorMatrix
-          type="matrix"
-          values="0 0 0 0 0.1
-                  0 0 0 0 0.08
-                  0 0 0 0 0.05
-                  0 0 0 0.6 0"
-        />
-      </filter>
-      <rect width="100%" height="100%" filter="url(#paperNoise)" />
-    </svg>
-  )
-}
-
-function CoffeeStain({ className, size = 140 }) {
-  // Irregular coffee ring stain with a slightly darker rim
-  return (
-    <svg
-      className={`coffee-stain ${className || ''}`}
-      width={size}
-      height={size}
-      viewBox="0 0 140 140"
-      aria-hidden="true"
-    >
-      <defs>
-        <radialGradient id={`cs-fill-${size}`} cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="#8B5A2B" stopOpacity="0" />
-          <stop offset="70%" stopColor="#8B5A2B" stopOpacity="0.08" />
-          <stop offset="88%" stopColor="#6B3F1E" stopOpacity="0.22" />
-          <stop offset="95%" stopColor="#5C3818" stopOpacity="0.28" />
-          <stop offset="100%" stopColor="#6B3F1E" stopOpacity="0" />
-        </radialGradient>
-      </defs>
-      <path
-        d="M70 8 C 102 8, 132 32, 132 70 C 132 108, 102 132, 70 132 C 38 132, 8 108, 8 70 C 8 32, 38 8, 70 8 Z"
-        fill={`url(#cs-fill-${size})`}
-      />
-      <path
-        d="M70 14 C 98 14, 126 36, 126 70 C 126 104, 98 126, 70 126 C 42 126, 14 104, 14 70 C 14 36, 42 14, 70 14 Z"
-        fill="none"
-        stroke="#6B3F1E"
-        strokeOpacity="0.12"
-        strokeWidth="2.2"
-        strokeDasharray="60 4 20 6 40 8"
-      />
-    </svg>
-  )
-}
-
-function MarginDoodle({ kind = 'arrow', className, color = '#1A1A1A', size = 28 }) {
-  const common = {
-    width: size,
-    height: size,
-    viewBox: '0 0 40 40',
-    fill: 'none',
-    stroke: color,
-    strokeWidth: 1.8,
-    strokeLinecap: 'round',
-    strokeLinejoin: 'round',
-    className: `margin-doodle ${className || ''}`,
-    'aria-hidden': true,
-  }
-
-  if (kind === 'arrow') {
-    return (
-      <svg {...common}>
-        <path d="M6 22 C 14 18, 22 22, 32 14" />
-        <path d="M26 11 L 32 14 L 30 20" />
-      </svg>
-    )
-  }
-  if (kind === 'star') {
-    return (
-      <svg {...common}>
-        <path d="M20 6 L 22 17 L 33 18 L 24 25 L 27 36 L 20 30 L 13 36 L 16 25 L 7 18 L 18 17 Z" />
-      </svg>
-    )
-  }
-  if (kind === 'squiggle') {
-    return (
-      <svg {...common}>
-        <path d="M4 22 C 8 14, 12 30, 16 22 C 20 14, 24 30, 28 22 C 32 14, 36 24, 38 22" />
-      </svg>
-    )
-  }
-  if (kind === 'asterisk') {
-    return (
-      <svg {...common}>
-        <path d="M20 8 L 20 32" />
-        <path d="M9 14 L 31 26" />
-        <path d="M9 26 L 31 14" />
-      </svg>
-    )
-  }
-  if (kind === 'tick') {
-    return (
-      <svg {...common}>
-        <path d="M6 22 L 15 31 L 34 10" />
-      </svg>
-    )
-  }
-  if (kind === 'smiley') {
-    return (
-      <svg {...common}>
-        <circle cx="20" cy="20" r="13" />
-        <circle cx="15" cy="17" r="0.9" fill={color} />
-        <circle cx="25" cy="17" r="0.9" fill={color} />
-        <path d="M13 23 C 16 27, 24 27, 27 23" />
-      </svg>
-    )
-  }
-  if (kind === 'circle') {
-    return (
-      <svg {...common}>
-        <path d="M20 7 C 30 7, 33 14, 33 20 C 33 28, 27 33, 19 33 C 10 33, 7 27, 8 19 C 9 11, 14 7, 20 7 Z" />
-      </svg>
-    )
-  }
-  return null
-}
-
-function TapedCorner({ color = '#E8DBB2' }) {
-  // Small piece of sketched tape on the top-left corner of a post-it
-  return (
-    <svg
-      className="taped-corner"
-      width="62"
-      height="26"
-      viewBox="0 0 62 26"
-      aria-hidden="true"
-    >
-      <defs>
-        <linearGradient id="tape-sheen" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.55" />
-          <stop offset="50%" stopColor={color} stopOpacity="0.85" />
-          <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0.35" />
-        </linearGradient>
-      </defs>
-      <path
-        d="M2 8 L 60 3 L 58 22 L 4 20 Z"
-        fill="url(#tape-sheen)"
-        stroke="#2A2A2A"
-        strokeOpacity="0.15"
-        strokeWidth="0.6"
-      />
-      <path d="M10 8 L 10 21" stroke="#2A2A2A" strokeOpacity="0.08" strokeWidth="0.6" />
-      <path d="M50 5 L 50 21" stroke="#2A2A2A" strokeOpacity="0.08" strokeWidth="0.6" />
-    </svg>
-  )
-}
-
-function WavyDivider({ color = '#1A1A1A', width = 220, strokeWidth = 1.6 }) {
-  return (
-    <svg
-      className="wavy-divider"
-      width={width}
-      height="16"
-      viewBox="0 0 220 16"
-      fill="none"
-      aria-hidden="true"
-    >
-      <path
-        d="M2 8 C 12 2, 22 14, 34 8 C 46 2, 58 14, 72 8 C 86 2, 100 14, 114 8 C 128 2, 142 14, 156 8 C 170 2, 184 14, 198 8 C 208 4, 214 10, 218 8"
-        stroke={color}
-        strokeWidth={strokeWidth}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  )
-}
-
-function HandDrawnUnderline({ color = '#1A1A1A', width = 180 }) {
-  return (
-    <svg
-      className="hand-underline"
-      width={width}
-      height="10"
-      viewBox="0 0 180 10"
-      fill="none"
-      aria-hidden="true"
-    >
-      <path
-        d="M3 6 C 25 3, 50 8, 75 5 C 100 2, 125 8, 150 5 C 165 3, 172 7, 177 5"
-        stroke={color}
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
-    </svg>
-  )
-}
-
-function HandDrawnButton({ children, color = '#1A1A1A', background = 'transparent' }) {
-  // Wobbly rectangular border as SVG, rendered behind button text
-  return (
-    <span className="hd-button-wrap">
-      <svg
-        className="hd-button-border"
-        viewBox="0 0 200 54"
-        preserveAspectRatio="none"
-        aria-hidden="true"
-      >
-        <path
-          d="M8 4 C 40 2, 90 6, 140 3 C 170 1, 192 5, 196 10
-             C 198 20, 197 34, 195 48
-             C 192 52, 150 51, 100 52 C 50 53, 14 51, 6 49
-             C 3 40, 2 22, 4 10 C 5 6, 6 5, 8 4 Z"
-          fill={background}
-          stroke={color}
-          strokeWidth="1.6"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-      <span className="hd-button-label" style={{ color }}>
-        {children}
-      </span>
-    </span>
-  )
-}
+const FORMSPREE_ID = 'xojoybar'
 
 /* ---------------------------------------------------------------
- * Hand-drawn style product icons
+ * Pieces
  * -------------------------------------------------------------*/
 
-function ProductIcon({ kind, color = '#1A1A1A' }) {
-  const common = {
-    width: 30,
-    height: 30,
-    viewBox: '0 0 32 32',
-    fill: 'none',
-    stroke: color,
-    strokeWidth: 1.7,
-    strokeLinecap: 'round',
-    strokeLinejoin: 'round',
-  }
-  if (kind === 'brain') {
-    return (
-      <svg {...common}>
-        <path d="M12 6 C 8 6, 5 9, 6 13 C 4 15, 5 19, 8 20 C 8 23, 11 25, 14 24 L 14 8 C 13 7, 12 6, 12 6 Z" />
-        <path d="M20 6 C 24 6, 27 9, 26 13 C 28 15, 27 19, 24 20 C 24 23, 21 25, 18 24 L 18 8 C 19 7, 20 6, 20 6 Z" />
-        <path d="M10 13 C 12 12, 13 14, 14 13" />
-        <path d="M18 13 C 19 14, 20 12, 22 13" />
+function Eye() {
+  const eyeRef = useRef(null)
+  const pupilRef = useRef(null)
+  const glintRef = useRef(null)
+
+  useEffect(() => {
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    let raf = null
+    const onMove = (e) => {
+      if (raf || !eyeRef.current) return
+      raf = requestAnimationFrame(() => {
+        const r = eyeRef.current.getBoundingClientRect()
+        const dx = e.clientX - (r.left + r.width / 2)
+        const dy = e.clientY - (r.top + r.height / 2)
+        const ang = Math.atan2(dy, dx)
+        const dist = Math.min(14, Math.hypot(dx, dy) / 40)
+        const px = 60 + Math.cos(ang) * dist
+        const py = 33 + Math.sin(ang) * dist * 0.55
+        pupilRef.current.setAttribute('cx', px)
+        pupilRef.current.setAttribute('cy', py)
+        glintRef.current.setAttribute('cx', px + 4)
+        glintRef.current.setAttribute('cy', py - 4)
+        raf = null
+      })
+    }
+    window.addEventListener('mousemove', onMove)
+    return () => window.removeEventListener('mousemove', onMove)
+  }, [])
+
+  return (
+    <div className="eye" aria-hidden="true" ref={eyeRef}>
+      <svg viewBox="0 0 120 66">
+        <g className="lid">
+          <path
+            d="M4 33 C 26 8, 94 8, 116 33 C 94 58, 26 58, 4 33 Z"
+            fill="none"
+            stroke="#1A1512"
+            strokeWidth="2"
+          />
+          <circle ref={pupilRef} cx="60" cy="33" r="11" fill="#407373" />
+          <circle ref={glintRef} cx="64" cy="29" r="3" fill="#F4F2EC" />
+        </g>
       </svg>
-    )
-  }
-  if (kind === 'shirt') {
-    return (
-      <svg {...common}>
-        <path d="M6 10 L 11 5 L 16 8 L 21 5 L 26 10 L 23 14 L 22 14 L 22 27 L 10 27 L 10 14 L 9 14 Z" />
-        <path d="M12 5 C 14 7, 18 7, 20 5" />
-      </svg>
-    )
-  }
-  if (kind === 'eye') {
-    return (
-      <svg {...common}>
-        <path d="M4 16 C 8 10, 12 8, 16 8 C 20 8, 24 10, 28 16 C 24 22, 20 24, 16 24 C 12 24, 8 22, 4 16 Z" />
-        <circle cx="16" cy="16" r="4" />
-        <circle cx="14.5" cy="14.5" r="1" fill={color} />
-      </svg>
-    )
-  }
-  if (kind === 'spark') {
-    return (
-      <svg {...common}>
-        <path d="M16 4 L 18 14 L 28 16 L 18 18 L 16 28 L 14 18 L 4 16 L 14 14 Z" />
-      </svg>
-    )
-  }
-  return null
+    </div>
+  )
 }
 
-function ArrowIcon({ hovered }) {
+function SeynseiMark() {
   return (
-    <svg
-      width="18"
-      height="18"
-      viewBox="0 0 18 18"
-      fill="none"
-      className="arrow-icon"
-      style={{
-        transform: hovered ? 'translate(3px, -3px) rotate(-4deg)' : 'translate(0, 0)',
-      }}
-    >
+    <svg className="mark" viewBox="0 0 72 72" fill="none" aria-hidden="true">
       <path
-        d="M4 14 C 7 11, 10 8, 14 5 M 9 4 C 11 4.5, 13 5, 14 5 C 14 6, 14 8, 13.5 10"
-        stroke="currentColor"
-        strokeWidth="1.6"
+        d="M50 15 A28 28 0 1 0 60 45"
+        stroke="#6FA3A3"
+        strokeWidth="7"
         strokeLinecap="round"
-        strokeLinejoin="round"
       />
+      <circle cx="36" cy="36" r="7.5" fill="#6FA3A3" />
     </svg>
   )
 }
 
-/* ---------------------------------------------------------------
- * ProductCard as a post-it note
- * -------------------------------------------------------------*/
+function useReveals() {
+  useEffect(() => {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((x) => {
+          if (x.isIntersecting) {
+            x.target.classList.add('in')
+            io.unobserve(x.target)
+          }
+        })
+      },
+      { threshold: 0.12 },
+    )
+    document.querySelectorAll('.rv').forEach((el) => io.observe(el))
+    return () => io.disconnect()
+  }, [])
+}
 
-function ProductCard({ product, index, isLive }) {
-  const [hovered, setHovered] = useState(false)
-
-  const Wrapper = isLive ? 'a' : 'div'
-  const wrapperProps = isLive
-    ? { href: product.url, target: '_blank', rel: 'noopener noreferrer' }
-    : {}
-
-  const rot = product.rotation ?? 0
-  const hoverRot = hovered ? rot * 0.2 : rot
+function WorkBand() {
+  const bandRef = useRef(null)
+  useEffect(() => {
+    const band = bandRef.current
+    if (!band) return
+    const onMove = (e) => {
+      const r = band.getBoundingClientRect()
+      band.style.setProperty('--mx', ((e.clientX - r.left) / r.width) * 100 + '%')
+      band.style.setProperty('--my', ((e.clientY - r.top) / r.height) * 100 + '%')
+    }
+    band.addEventListener('mousemove', onMove)
+    return () => band.removeEventListener('mousemove', onMove)
+  }, [])
 
   return (
-    <Wrapper
-      {...wrapperProps}
-      className={`product-card ${isLive ? 'product-card--live' : 'product-card--soon'} ${hovered ? 'is-hovered' : ''} fade-up`}
-      style={{
-        animationDelay: `${0.3 + index * 0.1}s`,
-        transform: `rotate(${hoverRot}deg)`,
-      }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-    >
-      <div className="postit" style={{ background: product.accent }}>
-        <div className="postit-tape">
-          <TapedCorner />
+    <section className="band section" id="work" ref={bandRef}>
+      <div id="beam" />
+      <div className="wrap">
+        <div className="sec-head rv">
+          <h2>Seen lately</h2>
+          <span className="eyebrow">the proof</span>
         </div>
-
-        <div className="card-header">
-          <div className="card-icon-wrap">
-            <ProductIcon kind={product.icon} color="#1A1A1A" />
-          </div>
-          {isLive ? (
-            <div className="badge badge--live">
-              <span className="badge-dot" />
+        <div className="cards rv">
+          <a
+            className="card"
+            href="https://seynsei.seyn.co.uk"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span className="status">
+              <span className="dot" />
               Live
-            </div>
-          ) : (
-            <div className="badge badge--soon">Coming soon</div>
-          )}
-        </div>
-
-        <h3 className="card-title">{product.name}</h3>
-        <p className="card-tagline">{product.tagline}</p>
-        <p className="card-description">{product.description}</p>
-
-        {isLive && (
-          <div className="card-cta">
-            Try it now
-            <ArrowIcon hovered={hovered} />
+            </span>
+            <SeynseiMark />
+            <h3>Seynsei</h3>
+            <div className="tagline">Social confidence coach</div>
+            <p>
+              Small real-world confidence challenges, graded from a moment of
+              eye contact to the conversations you avoid. Rate the anxiety
+              before and after, and talk it through with a calm CBT-informed
+              coach.
+            </p>
+            <span className="go">Try it free →</span>
+          </a>
+          <div className="card card--reserved">
+            <h3>This space is reserved.</h3>
+            <p>
+              The next thing we make seen could be yours. Bring us a brand, a
+              product or a problem.
+            </p>
+            <a className="go" href="#enquire">
+              Enquire below →
+            </a>
           </div>
-        )}
+        </div>
       </div>
-    </Wrapper>
+    </section>
+  )
+}
+
+function EnquiryForm() {
+  const [status, setStatus] = useState('idle') // idle | sending | sent | error
+
+  const onSubmit = async (e) => {
+    e.preventDefault()
+    setStatus('sending')
+    try {
+      const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+        method: 'POST',
+        body: new FormData(e.target),
+        headers: { Accept: 'application/json' },
+      })
+      if (res.ok) {
+        setStatus('sent')
+      } else {
+        setStatus('error')
+      }
+    } catch {
+      setStatus('error')
+    }
+  }
+
+  if (status === 'sent') {
+    return (
+      <div className="form-done rv in">
+        <p className="serif done-line">
+          Consider yourself <em className="italic">seyn</em>.
+        </p>
+        <p className="side-note">
+          Your enquiry is in. We reply within 48 hours, usually sooner.
+        </p>
+      </div>
+    )
+  }
+
+  return (
+    <form onSubmit={onSubmit} className="rv">
+      <div className="two">
+        <div className="field">
+          <label htmlFor="name">Name</label>
+          <input id="name" name="name" type="text" required autoComplete="name" />
+        </div>
+        <div className="field">
+          <label htmlFor="email">Email</label>
+          <input id="email" name="email" type="email" required autoComplete="email" />
+        </div>
+      </div>
+      <div className="field">
+        <label htmlFor="need">What do you need?</label>
+        <select id="need" name="need" defaultValue="Marketing and attention">
+          <option>Marketing and attention</option>
+          <option>Social tools</option>
+          <option>Consulting</option>
+          <option>Something else entirely</option>
+        </select>
+      </div>
+      <div className="field">
+        <label htmlFor="message">Tell us about it</label>
+        <textarea
+          id="message"
+          name="message"
+          rows="5"
+          placeholder="What are you building, and who needs to see it?"
+          required
+        />
+      </div>
+      <button className="btn btn--solid" type="submit" disabled={status === 'sending'}>
+        {status === 'sending' ? 'Sending…' : 'Send it'}
+      </button>
+      {status === 'error' && (
+        <p className="side-note form-error">
+          That didn't send. Try again, or email{' '}
+          <a href="mailto:hello@seyn.co.uk">hello@seyn.co.uk</a> directly.
+        </p>
+      )}
+      <p className="side-note">
+        Prefer email? <a href="mailto:hello@seyn.co.uk">hello@seyn.co.uk</a>
+      </p>
+    </form>
   )
 }
 
@@ -389,105 +335,167 @@ function ProductCard({ product, index, isLive }) {
  * -------------------------------------------------------------*/
 
 export default function App() {
-  const [loaded, setLoaded] = useState(false)
-
-  useEffect(() => {
-    const t = setTimeout(() => setLoaded(true), 100)
-    return () => clearTimeout(t)
-  }, [])
-
-  const liveProducts = products.filter((p) => p.status === 'live')
+  useReveals()
 
   return (
-    <div className={`page ${loaded ? 'is-loaded' : ''}`}>
-      {/* Background layers — fixed so they extend across the whole page */}
-      <div className="ruled-lines" aria-hidden="true" />
-      <div className="margin-line" aria-hidden="true" />
-      <PaperTexture />
-
-      {/* Occasional coffee stains, positioned in viewport */}
-      <CoffeeStain className="coffee-stain--one" size={160} />
-      <CoffeeStain className="coffee-stain--two" size={110} />
-
-      <div className="content">
-        {/* Nav */}
-        <nav className="nav fade-down">
-          <div className="nav-logo">
-            <img src="/seyn-logo.svg" alt="SEYN" className="nav-logo-img" />
-          </div>
+    <>
+      <nav>
+        <div className="wrap nav-in">
+          <a href="#top" className="wordmark" aria-label="SEYN home">
+            <img className="wordmark-eye" src="/favicon.svg" alt="" aria-hidden="true" />
+            <span className="wordmark-name serif">SEYN</span>
+          </a>
           <div className="nav-links">
-            {liveProducts.map((p) => (
-              <a
-                key={p.name}
-                href={p.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="nav-link"
-              >
-                <HandDrawnButton>{p.name}</HandDrawnButton>
-              </a>
-            ))}
+            <a href="#journal">Journal</a>
+            <a href="#services">Services</a>
+            <a href="#work">Work</a>
+            <a
+              href="https://instagram.com/getseyn"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="SEYN on Instagram"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+                <rect x="3" y="3" width="18" height="18" rx="5" />
+                <circle cx="12" cy="12" r="4" />
+                <circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none" />
+              </svg>
+            </a>
+            <a className="btn" href="#enquire">
+              Enquire
+            </a>
           </div>
-        </nav>
+        </div>
+      </nav>
 
-        {/* Hero */}
-        <section className="hero fade-up">
-          {/* Doodles floating around the hero */}
-          <MarginDoodle kind="star" className="doodle doodle-hero-star" size={26} color="#1E2B5C" />
-          <MarginDoodle kind="arrow" className="doodle doodle-hero-arrow" size={44} color="#1A1A1A" />
-          <MarginDoodle kind="asterisk" className="doodle doodle-hero-asterisk" size={20} color="#1E2B5C" />
+      <header className="hero wrap" id="top">
+        <div className="hero-meta eyebrow">
+          <span>The SEYN journal · field notes on attention</span>
+          <span>United Kingdom</span>
+        </div>
+        <h1>
+          Notes on getting <span className="u">seyn</span>.
+        </h1>
+        <p className="sub">
+          SEYN is an attention studio. This is the notebook we work from:
+          honest, useful notes on how brands, products and people get noticed.
+          Take the free help. Hire us when you want it done for you.
+        </p>
+        <div className="ctas">
+          <a className="btn btn--solid" href="#journal">
+            Read the notes
+          </a>
+          <a className="btn" href="#enquire">
+            Start an enquiry
+          </a>
+        </div>
+        <Eye />
+      </header>
 
-          <div className="hero-logo-wrap">
-            <img src="/seyn-logo.svg" alt="SEYN" className="hero-logo" />
+      <section className="section wrap" id="journal">
+        <div className="sec-head rv">
+          <h2>
+            The <em className="serif italic">journal</em>
+          </h2>
+          <span className="eyebrow">free help, no email wall</span>
+        </div>
+        <div className="ledger rv">
+          {JOURNAL.map((e) => (
+            <details className="entry" key={e.no}>
+              <summary>
+                <span className="date">NO. {e.no}</span>
+                <h3>{e.title}</h3>
+                <span className="read">2 min →</span>
+              </summary>
+              <div className="body">{e.body}</div>
+            </details>
+          ))}
+        </div>
+      </section>
+
+      <section className="section wrap" id="services">
+        <div className="sec-head rv">
+          <h2>
+            When you'd rather we <em className="serif italic">did it</em>
+          </h2>
+          <span className="eyebrow">the services behind the notes</span>
+        </div>
+        <div className="ledger rv">
+          {SERVICES.map((s) => (
+            <div className="row" key={s.idx}>
+              <span className="idx">{s.idx}</span>
+              <h3>{s.name}</h3>
+              <p>{s.blurb}</p>
+              <span className="tag">{s.tag}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <WorkBand />
+
+      <section className="section wrap about" id="about">
+        <span className="eyebrow rv">Why SEYN exists</span>
+        <p className="rv big-line">
+          Good things go unnoticed every day. Good businesses, good products,
+          good people. We think that's a design problem, and{' '}
+          <em>design problems can be solved.</em>
+        </p>
+        <div className="cols rv">
+          <div>
+            SEYN Ltd is a UK studio working across marketing, product and
+            consulting. One team, one obsession: engineering the moment where
+            the right people finally notice.
           </div>
-
-          <p className="hero-subtitle">
-            Tools for who you're destined to become.
-          </p>
-
-          <div className="hero-divider">
-            <WavyDivider color="#1A1A1A" width={240} />
+          <div>
+            We take on a small number of clients at a time and build our own
+            products between engagements, so every promise we make to you has
+            been tested on ourselves first.
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Products */}
-        <section className="products">
-          <div className="section-heading-wrap">
-            <h2 className="section-heading">the products</h2>
-            <HandDrawnUnderline width={170} />
+      <section className="section enquiry" id="enquire">
+        <div className="wrap">
+          <div className="sec-head rv">
+            <h2>
+              Be <em className="serif italic">seyn</em> next
+            </h2>
+            <span className="eyebrow">replies within 48 hours</span>
           </div>
+          <EnquiryForm />
+        </div>
+      </section>
 
-          {/* Some margin scribbles near the products */}
-          <MarginDoodle kind="squiggle" className="doodle doodle-products-squiggle" size={40} color="#1A1A1A" />
-          <MarginDoodle kind="tick" className="doodle doodle-products-tick" size={26} color="#1E2B5C" />
-          <MarginDoodle kind="circle" className="doodle doodle-products-circle" size={32} color="#1E2B5C" />
-
-          <div className="products-grid">
-            {products.map((p, i) => (
-              <ProductCard
-                key={p.name}
-                product={p}
-                index={i}
-                isLive={p.status === 'live'}
-              />
-            ))}
+      <footer className="wrap">
+        <div className="foot">
+          <div className="rv">
+            <img className="foot-logo" src="/favicon.svg" alt="" aria-hidden="true" />
+            <div className="big">
+              Get <em>seen.</em>
+            </div>
           </div>
-
-          <div className="products-note">
-            <span className="products-note-text">pick one →</span>
+          <div className="foot-links rv">
+            <a href="mailto:hello@seyn.co.uk">hello@seyn.co.uk</a>
+            <br />
+            <a href="https://instagram.com/getseyn" target="_blank" rel="noopener noreferrer">
+              @getseyn
+            </a>{' '}
+            · SEYN on Instagram
+            <br />
+            <a href="https://instagram.com/seynseiapp" target="_blank" rel="noopener noreferrer">
+              @seynseiapp
+            </a>{' '}
+            · Seynsei on Instagram
           </div>
-        </section>
-
-        {/* Footer */}
-        <footer className="footer fade-up" style={{ animationDelay: '0.8s' }}>
-          <div className="footer-divider">
-            <WavyDivider color="#1A1A1A" width={220} strokeWidth={1.4} />
-          </div>
-          <div className="footer-logo">SEYN</div>
-          <p className="footer-tagline">Designed for growth.</p>
-          <MarginDoodle kind="star" className="doodle doodle-footer-star" size={18} color="#1E2B5C" />
-        </footer>
-      </div>
-    </div>
+        </div>
+        <div className="legal">
+          <span>© 2026 SEYN Ltd. Registered in England.</span>
+          <span>
+            <a href="https://seynsei.seyn.co.uk/privacy.html">Privacy</a>
+          </span>
+        </div>
+      </footer>
+    </>
   )
 }

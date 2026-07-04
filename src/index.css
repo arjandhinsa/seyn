@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Archivo:wght@400;500;600&display=swap');
 
 *,
 *::before,
@@ -13,9 +13,11 @@ html {
 }
 
 body {
-  font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
-  background: #D9C79A;
+  font-family: 'Archivo', system-ui, -apple-system, sans-serif;
+  background: #F4F2EC;
   color: #1A1512;
+  font-size: 16px;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -27,6 +29,6 @@ a {
 }
 
 ::selection {
-  background: rgba(142, 118, 179, 0.6);  /* deep plum highlighter */
+  background: rgba(64, 115, 115, 0.35);  /* teal ink highlighter */
   color: #1A1512;
 }
