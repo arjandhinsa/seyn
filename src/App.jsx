@@ -291,8 +291,8 @@ function WorkBand() {
           <h3>Seynario</h3>
           <div className="tagline">AI wardrobe stylist</div>
           <p>
-            Photograph what you own, describe the moment in your own words
-            and and get complete outfits from your
+            Photograph what you own, describe the occasion in your own words
+            and then get a complete outfit built from your
             wardrobe, with the reasoning behind every piece.
           </p>
           <span className="go">Dress for the scenario →</span>
