@@ -77,6 +77,35 @@ const JOURNAL = [
       </>
     ),
   },
+  {
+    no: '004',
+    title: 'Word of mouth is a design job',
+    body: (
+      <>
+        <p>
+          Most referrals do not die because people dislike you. They die
+          because people cannot describe you. "They do, like, marketing
+          stuff?" is where recommendations go to end. If your happiest
+          customer cannot say what you do in one sentence, you do not have
+          a word of mouth problem. You have a wording problem.
+        </p>
+        <p>
+          So write the sentence for them. One line, plain words, a specific
+          person and a specific result. "They build websites that get local
+          trades more calls" travels. "Full-service digital solutions" does
+          not. Put the line in your bio, your email signature, and your
+          answer to "so what do you do?" until people start repeating it
+          back to you.
+        </p>
+        <p>
+          Then lower the cost of passing it on. Ask at the moment of a win,
+          not months later, and hand over something forwardable: a link, a
+          short note they can send as-is. People want to recommend you.
+          Make it a ten-second job.
+        </p>
+      </>
+    ),
+  },
 ]
 
 const SERVICES = [
@@ -170,6 +199,22 @@ function SeynseiMark() {
   )
 }
 
+function SeynarioMark() {
+  return (
+    <svg className="mark" viewBox="0 0 72 72" fill="none" aria-hidden="true">
+      {/* clothes hanger */}
+      <path
+        d="M36 18 v6 M14 50 L36 26 L58 50 Z"
+        stroke="#6FA3A3"
+        strokeWidth="5"
+        strokeLinejoin="round"
+        strokeLinecap="round"
+      />
+      <circle cx="36" cy="14" r="5" stroke="#6FA3A3" strokeWidth="4" />
+    </svg>
+  )
+}
+
 function useReveals() {
   useEffect(() => {
     const io = new IntersectionObserver(
@@ -232,6 +277,27 @@ function WorkBand() {
             </p>
             <span className="go">Try it free →</span>
           </a>
+        <a
+          className="card"
+          href="https://seynario.seyn.co.uk"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span className="status">
+            <span className="dot" />
+            Live
+          </span>
+          <SeynarioMark />
+          <h3>Seynario</h3>
+          <div className="tagline">AI wardrobe stylist</div>
+          <p>
+            Photograph what you own, describe the moment in your own words
+            and and get complete outfits from your
+            wardrobe, with the reasoning behind every piece.
+          </p>
+          <span className="go">Dress for the scenario →</span>
+        </a>
+
           <div className="card card--reserved">
             <h3>This space is reserved.</h3>
             <p>
@@ -493,6 +559,8 @@ export default function App() {
           <span>© 2026 SEYN Ltd. Registered in England.</span>
           <span>
             <a href="https://seynsei.seyn.co.uk/privacy.html">Privacy</a>
+            {' · '}
+            <a href="https://seynario.seyn.co.uk/privacy">Seynario privacy</a>
           </span>
         </div>
       </footer>
