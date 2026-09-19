@@ -277,26 +277,6 @@ function WorkBand() {
             </p>
             <span className="go">Try it free →</span>
           </a>
-        <a
-          className="card"
-          href="https://seynario.seyn.co.uk"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <span className="status">
-            <span className="dot" />
-            Live
-          </span>
-          <SeynarioMark />
-          <h3>Seynario</h3>
-          <div className="tagline">AI wardrobe stylist</div>
-          <p>
-            Photograph what you own, describe the occasion in your own words
-            and then get a complete outfit built from your
-            wardrobe, with the reasoning behind every piece.
-          </p>
-          <span className="go">Dress for the scenario →</span>
-        </a>
 
           <div className="card card--reserved">
             <h3>This space is reserved.</h3>
@@ -559,8 +539,6 @@ export default function App() {
           <span>© 2026 SEYN Ltd. Registered in England.</span>
           <span>
             <a href="https://seynsei.seyn.co.uk/privacy.html">Privacy</a>
-            {' · '}
-            <a href="https://seynario.seyn.co.uk/privacy">Seynario privacy</a>
           </span>
         </div>
       </footer>
